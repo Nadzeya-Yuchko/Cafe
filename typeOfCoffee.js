@@ -1,5 +1,5 @@
 function espressoRecipe() {
-     let espresso = `1. Turn on the espresso machine.
+      let espresso = `1. Turn on the espresso machine.
 2. Wipe the portafilter with a clean, dry cloth. 
 3. Dose the coffee grounds into the portafilter. 
 4. Level the dose and tamp it evenly.
@@ -10,7 +10,7 @@ function espressoRecipe() {
 }
 
 function cappuccinoRecipe() {
-         let cappuccino = `8. Pour milk to the pitcher.
+      let cappuccino = `8. Pour milk to the pitcher.
 9. Your machine will have built-up steam that you can now release using the steam wand. 
 Purge the steam wand and pull it to far up and straight position. 
 Place the pitcher so that the nozzle is aligned to the steam wand. 
@@ -54,7 +54,25 @@ function choosenRecipe(name) {
       }
 }
 
+const ingredients = {
+      espresso: ['water', 'coffee', 'milk'],
+      cappuccino: ['water', 'coffee', 'milk'],
+      latte: ['water', 'coffee', 'milk'],
+      sugar: {
+            yes: '2 sachets',
+            no: 'sugar-free',
+      },
+      milk: {
+            cow: `cow's milk`,
+            almond: 'almond milk',
+      },
+      showIngredients(name) {
+            console.log(`Ingredients:`, ingredients[name].join(', '))
+      }
+}
+
 const price = {
+      currency: '$',
       priceSmall: 3,
       priceMedium: 5,
       priceBig: 6
@@ -63,24 +81,33 @@ const price = {
 function priceCoffe(size) {
       switch (size) {
             case 'small':
-                  return price['priceSmall'] + ' ' + `$`;
-            case 'medium':      
-                  return price['priceMedium'] + ' ' + `$`;
+                  return price['priceSmall'];
+            case 'medium':
+                  return price['priceMedium'];
             case 'big':
-                  return price['priceBig'] + ' ' + `$`;
+                  return price['priceBig'];
             default:
-                  return `small size ${price['priceSmall']} $, 
-      medium size ${price['priceMedium']} $,
-      big size ${price['priceBig']} $`
+                  return `small size ${price['priceSmall']} ${price.currency}, 
+      medium size ${price['priceMedium']} ${price.currency},
+      big size ${price['priceBig']} ${price.currency}`
       }
 }
 
 export default class Coffee {
-      constructor(name, size) {
+      constructor(name, size, number, milk, sugar) {
             this.name = name;
             this.size = size;
             this.price = priceCoffe(size);
+            this.number = number;
+            this.milk = milk;
+            this.sugar = sugar;
       }
+
+      getCoffeePrice() {
+            let totalCoffeePrice = this.price * this.number
+            return totalCoffeePrice
+      }
+
       chooseCoffee() {
             if (this.name == 'espresso' || this.name == 'cappuccino' || this.name == 'latte') {
                   console.log(`Choosen coffee: ${this.name}.`)
@@ -93,14 +120,38 @@ export default class Coffee {
             } else {
                   console.log(`You can choose small, medium or big size`)
             }
-            
-            console.log(`Price: ${this.price}.` + '\n');
 
+            if (this.number > 0) {
+                  console.log(`Number of cup:`, this.number)
+                  console.log(`Price:`, this.getCoffeePrice(), price.currency + '\n')
+            } else {
+                  console.log(`You need to choose numbers of cup.`)
+            }
+
+            if (this.name == 'espresso' || this.name == 'cappuccino' || this.name == 'latte') {
+                  if (this.milk == 'cow' || this.milk == 'almond') {
+                        console.log(`Kind of milk:`, ingredients.milk[this.milk])
+                  } else { console.log(`Kind of milk:`, ingredients.milk.cow) }
+            } else {console.log(`You can choose cow's or almond milk`)}
+
+            if (this.name == 'espresso' || this.name == 'cappuccino' || this.name == 'latte') {
+                  ingredients.showIngredients(this.name)
+            }
+
+            if (this.name == 'espresso' || this.name == 'cappuccino' || this.name == 'latte') {
+                  if (this.sugar == 'yes' || this.sugar == 'no') {
+                        console.log(`Sugar:`, ingredients.sugar[this.sugar])
+                  } else { console.log(`Sugar:`, ingredients.sugar.no) }
+            } else {
+                  console.log(`You can add a sugar`)
+            }
+            console.log('----------------------')
+      }
+      cookCoffee() {
             if (this.name == 'espresso' || this.name == 'cappuccino' || this.name == 'latte') {
                   console.log(`${this.name}. Recipe step by step.\n `.toUpperCase())
             } else { console.log(`There will be shown recipe of coffee`) }
-            
-            console.log(choosenRecipe(this.name), `\n Coffee is ready! \n`)    
+
+            console.log(choosenRecipe(this.name), `\n Coffee is ready! \n`)
       }
 }
-
