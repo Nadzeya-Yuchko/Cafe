@@ -1,7 +1,5 @@
-import Coffee from "./typeOfCoffee";
-import Sandwich from "./typeOfSandwich";
+function getTotalPrice(coffee, sandwich) {
+      console.log(`Total price:`, coffee.getCoffeePrice() + sandwich.getSandwichPrice() + ' ' + '$')
+}
 
-import { coffee, sandwich } from "./makeAnOrderCofeeAndSandwich";
-// function getTotalPrice() {
-//       let totalPrice = 
-// }
+export {getTotalPrice}

@@ -71,8 +71,6 @@ const ingredients = {
       }
 }
 
-// ingredients.showIngredients('latte')
-
 const price = {
       currency: '$',
       priceSmall: 3,
@@ -105,7 +103,7 @@ export default class Coffee {
             this.sugar = sugar;
       }
 
-      getPrice() {
+      getCoffeePrice() {
             let totalCoffeePrice = this.price * this.number
             return totalCoffeePrice
       }
@@ -125,7 +123,7 @@ export default class Coffee {
 
             if (this.number > 0) {
                   console.log(`Number of cup:`, this.number)
-                  console.log(`Price:`, this.getPrice(), price.currency + '\n')
+                  console.log(`Price:`, this.getCoffeePrice(), price.currency + '\n')
             } else {
                   console.log(`You need to choose numbers of cup.`)
             }
@@ -157,6 +155,3 @@ export default class Coffee {
             console.log(choosenRecipe(this.name), `\n Coffee is ready! \n`)
       }
 }
-
-let coffee = new Coffee('latte', 'big', '3', '', '')
-coffee.chooseCoffee()

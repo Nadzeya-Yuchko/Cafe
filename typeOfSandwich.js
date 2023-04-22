@@ -99,9 +99,14 @@ export default class Sandwich {
                   this.bread = kindOfSandwich[name].kindOfBread[bread]    
             } else {this.bread = 'something bread'};
 
-            // console.log(this.bread)
             this.temperature = temperature;
             this.number = number           
+      }
+
+      getSandwichPrice() {
+            const words = this.name.toLowerCase().split(' ')
+            let totalSandwichPrice = kindOfSandwich[words[0]].price * this.number
+            return totalSandwichPrice
       }
       
       chooseSandwich() {
@@ -117,7 +122,7 @@ export default class Sandwich {
 
             if (this.name.toLowerCase().includes('chicken') || this.name.toLowerCase().includes('ham') || this.name.toLowerCase().includes('veg')) {
                   console.log(`Number of sandwiches:`, this.number)
-                  console.log(`Price:`, kindOfSandwich[words[0]].price * this.number, kindOfSandwich[words[0]].currency + '\n') 
+                  console.log(`Price:`, this.getSandwichPrice(), kindOfSandwich[words[0]].currency + '\n') 
             }
 
             if (this.name.toLowerCase().includes('chicken') || this.name.toLowerCase().includes('ham') ||
@@ -135,7 +140,6 @@ export default class Sandwich {
            
             if (this.name.toLowerCase().includes('chicken') || this.name.toLowerCase().includes('ham') || this.name.toLowerCase().includes('veg')) {
                   kindOfSandwich[words[0]].showIngredients()
-                  console.log('')
             }
       }
 
@@ -156,6 +160,3 @@ export default class Sandwich {
            }
 }
 
-// let sandwich = new Sandwich('veg', 'white', 'ordinary', '3')
-// // sandwich.chooseSandwich()
-// sandwich.cookSandwich()
