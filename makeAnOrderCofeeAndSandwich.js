@@ -8,7 +8,7 @@ import { getTotalPrice } from "./totalPrice.js"
  kind of milk: 'cow' or 'almond' (default - cow)
  sugar: 'yes' or 'no'  (default - no) */
 
-let coffee = new Coffee('cappuccino', 'medium', '1', 'almond', 'yes')
+let coffee = new Coffee('espresso', 'small', '1', '', '')
 coffee.chooseCoffee()
 
 /* Need to type name: 'ham', 'chicken' or 'veg'
