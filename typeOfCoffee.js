@@ -81,15 +81,15 @@ const price = {
 function priceCoffe(size) {
       switch (size) {
             case 'small':
-                  return price['priceSmall'];
+                  return price.priceSmall;
             case 'medium':
-                  return price['priceMedium'];
+                  return price.priceMedium;
             case 'big':
-                  return price['priceBig'];
+                  return price.priceBig;
             default:
-                  return `small size ${price['priceSmall']} ${price.currency}, 
-      medium size ${price['priceMedium']} ${price.currency},
-      big size ${price['priceBig']} ${price.currency}`
+                  return `small size ${price.priceSmall} ${price.currency}, 
+      medium size ${price.priceMedium} ${price.currency},
+      big size ${price.priceBig} ${price.currency}`
       }
 }
 
@@ -145,13 +145,20 @@ export default class Coffee {
             } else {
                   console.log(`You can add a sugar`)
             }
+
+            if (this.name != 'espresso' && this.name != 'cappuccino' && this.name != 'latte') {
+                  console.log(`There will be shown recipe of coffee`)
+            }
+
             console.log('----------------------')
       }
       cookCoffee() {
             if (this.name == 'espresso' || this.name == 'cappuccino' || this.name == 'latte') {
                   console.log(`${this.name}. Recipe step by step.\n `.toUpperCase())
-            } else { console.log(`There will be shown recipe of coffee`) }
+            } 
 
-            console.log(choosenRecipe(this.name), `\n Coffee is ready! \n`)
+            if (this.name == 'espresso' || this.name == 'cappuccino' || this.name == 'latte') {
+                  console.log(choosenRecipe(this.name), `\n Coffee is ready! \n`)
+            }
       }
 }
